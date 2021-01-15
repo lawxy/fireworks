@@ -29,7 +29,6 @@ export default function drawFireworks({x, y}) {
 //     requestAnimationFrame(tick);
 // }
 export function fireworksJob() {
-    clearCanvas();//清除画布
     //清除绽放完的烟花
     fireworks = fireworks.filter(firework => firework.points.length > 0)
     // console.log(fireworks)
