@@ -1,30 +1,29 @@
 import { random } from '@/utils';
-export default class Star {
+export default class Meteor {
     constructor() {
         this.x = random(0, window.innerWidth)
-        this.y = random(0, window.innerHeight/2)
-        this.r = random(3, 5);
-        // this.init()
+        this.y = 0
+        this.r = random(5, 8);
+        // this.angle = random(0, 1) * Math.PI;
+        let angle = Math.atan(window.innerHeight  / window.innerWidth)
+        this.angle = random(0, 1) > 0.5 ? random(0, angle) : random(Math.PI - angle, Math.PI)
+        this.speed = random(5, 8);
+        this.dead = false;
         this.draw()
     }
-    // init() {
-    //     window.addEventListener('resize', () => {
-    //         this.x = random(0, window.innerWidth)
-    //         this.y = random(0, window.innerHeight/2)
-    //     });
-    // }
     update() {
-
-        let r = this.r
-        r += Math.random() * 2 - 1;
-        r = Math.max(0, r);
-        r = Math.min(3, r);
-        this.r = r;
-        this.draw()
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        
+        if(Math.abs(this.x) > window.innerWidth) this.dead = true
+        else this.draw()
+        
     }
     draw() {
         let ctx = canvas.getContext('2d')
         ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+
         var rad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
         rad.addColorStop(0, 'rgba(255,255,255,0.8)');
         rad.addColorStop(0.1, 'rgba(255,255,255,0.8)');
@@ -36,5 +35,6 @@ export default class Star {
         ctx.closePath();
         ctx.fill();
         ctx.restore();
+
     }
 }
