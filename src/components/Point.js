@@ -8,6 +8,7 @@ export default class Point {
         this.angle =  Math.random() * Math.PI * 2;; // 对于鼠标点击中心的角度
         // this.radius = Math.floor(Math.random()*3)+1; // 粒子的半径
         this.radius = random(8,15); // 粒子的半径
+        // this.radius = random(2,3); // 粒子的半径
         this.dead = false;
         this.hue = hue
         // this.speed = (Math.random()*5)+.4; // 速度
@@ -49,7 +50,7 @@ export default class Point {
         gradient.addColorStop(0.1, "rgba(255,255,255," + this.alpha + ")");
         gradient.addColorStop(0.8, "hsla(" + this.hue + ", 100%, 50%, " + this.alpha + ")");
         gradient.addColorStop(1, "hsla(" + this.hue + ", 100%, 50%, 0.1)");
-        context.fillStyle = gradient
+        context.fillStyle = gradient;
 
         context.fill();
         context.restore();
